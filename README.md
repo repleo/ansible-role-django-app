@@ -14,12 +14,12 @@ Only tested on ubuntu and debian for now.
 Available variables are listed below, along with default values:
 
 ```yaml
-www_domain: changeme
-dbuser: changeme
-dbpassword: changeme
-dbname: changeme
-ssl_cert: "mac-usb-serial.com_chain.pem",
-ssl_key: "mac-usb-serial.com.key"
+www_domain: "example.com",
+dbuser: "example",
+dbpassword: "3x4mple",
+dbname: "example",
+ssl_cert: "example.com_chain.pem",
+ssl_key: "example.com.key"
 ```
 
 

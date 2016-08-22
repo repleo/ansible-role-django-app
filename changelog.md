@@ -1,6 +1,10 @@
 # Change Log
 Generic repleo django installation role
 
+## [0.1.2] - Release 2016-08-22
+
+* Updated readme
+
 ## [0.1.1] - Release 2016-08-22
 
 * Removed unused dependency
