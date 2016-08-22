@@ -28,7 +28,6 @@ galaxy_info:
    - http
    - python
 dependencies:
-    - { role: ansible-role-base }
     - { role: repleo.nginx,
               create_nginx_conf: false,
               nginx_sites: []
