@@ -1,0 +1,32 @@
+server {
+  listen [::]:80;
+  server_name {{ www_domain }} *.{{ www_domain }};
+  return 301 https://$http_host$request_uri;
+  access_log  /var/log/nginx/{{ www_domain }}_access.log;
+  error_log   /var/log/nginx/{{ www_domain }}_error.log;
+}
+
+
+server {
+  listen [::]:443 ssl;
+  server_name {{ www_domain }} *.{{ www_domain }};
+
+  ssl on;
+  ssl_certificate /etc/nginx/ssl/{{ ssl_cert }};
+  ssl_certificate_key /etc/nginx/ssl/{{ ssl_key }};
+
+  access_log  /var/log/nginx/{{ www_domain }}_access.log;
+  error_log   /var/log/nginx/{{ www_domain }}_error.log;
+
+  location /static {
+    root /srv/www/{{ www_domain }}/media;
+    include mime.types;
+  }
+
+  location / {
+    include uwsgi_params;
+    uwsgi_read_timeout 9600;
+    uwsgi_send_timeout 9600;
+    uwsgi_pass unix://run/uwsgi/app/{{ www_domain }}/socket;
+  }
+}

@@ -1,0 +1,81 @@
+
+
+- name: Install base packages
+  action: apt pkg={{item}} state=present
+  with_items:
+  - gettext
+  - python3.4
+  - python3.4-dev
+  - python3-setuptools
+  - uwsgi
+  - uwsgi-plugin-python3
+  - git
+
+- name: Install pip
+  easy_install: name=pip executable=easy_install-3.4
+
+- name: Install virtualenv
+  easy_install: name=virtualenv executable=easy_install-3.4
+
+- name: remove app directory in /srv/www
+  file: path=/srv/www/{{www_domain}} state=absent
+
+- name: create directory /srv/www
+  file: path=/srv/www/{{www_domain}} state=directory
+
+- name: create directory /etc/nginx
+  file: path=/etc/nginx state=directory
+
+- name: create directory /etc/nginx/ssl
+  file: path=/etc/nginx/ssl state=directory
+
+- name: Copy SSL keys
+  copy: src={{ssl_key}} dest=/etc/nginx/ssl/{{ssl_key}} backup=no chown=BLABLA
+  notify:
+    - restart nginx
+
+- name: Copy SSL certificates
+  copy: src={{ssl_cert}} dest=/etc/nginx/ssl/{{ssl_cert}} backup=no
+  notify:
+    - restart nginx
+
+- name: Create the nginx configuration for site
+  template: src=nginx/site.j2 dest=/etc/nginx/sites-available/{{www_domain}}
+  notify:
+   - restart nginx
+
+- name: Create the links to enable ca configuration
+  file: path=/etc/nginx/sites-enabled/{{www_domain}} state=link src=/etc/nginx/sites-available/{{www_domain}}
+  notify:
+   - restart nginx
+
+- name: checkout git repo
+  git: repo="{{repo}}" dest=/srv/www/{{www_domain}} force=yes version="{{version}}"
+
+- name: Install requirements
+  pip:
+    requirements: /srv/www/{{www_domain}}/requirements.txt
+    virtualenv: /srv/www/{{www_domain}}/env
+    virtualenv_python: python3.4
+
+- name: copy uwsgi config
+  template: src=uwsgi/site.ini.j2 dest=/etc/uwsgi/apps-available/{{www_domain}}.ini
+
+- name: create uwsgi symlink
+  file: src=/etc/uwsgi/apps-available/{{www_domain}}.ini dest=/etc/uwsgi/apps-enabled/{{www_domain}}.ini state=link
+
+- name: stop uwsgi automatic
+  service: name=uwsgi state=stopped
+
+- name: migrate django database
+  django_manage: command="migrate --noinput" app_path=/srv/www/{{www_domain}} virtualenv=/srv/www/{{www_domain}}/env
+
+
+- name: start uwsgi automatic
+  service: name=uwsgi state=restarted enabled=yes
+
+- name: collect the static files
+  django_manage: command="collectstatic --noinput" app_path=/srv/www/{{www_domain}} virtualenv=/srv/www/{{www_domain}}/env
+
+- name: Username set of app directories
+  file: path=/srv/www/{{www_domain}} owner=www-data group=www-data mode=755 recurse=yes

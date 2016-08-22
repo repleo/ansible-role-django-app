@@ -1,0 +1,13 @@
+---
+
+- hosts: localhost
+  remote_user: root
+  roles:
+  - { role: ansible-role-django-app,
+            www_domain: "git",
+            dbuser: "git",
+            dbpassword: "3x4mple",
+            dbname: "git",
+            ssl_cert: "git_chain.pem",
+            ssl_key: "git.key"
+    }

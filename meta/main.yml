@@ -1,0 +1,47 @@
+galaxy_info:
+  author: Jeroen Arnoldus
+  description: Ansible role for installing a Django based web application including uwsgi, postgresql and nginx
+  company: Repleo, Amstelveen, Holland
+  license: BSD
+  min_ansible_version: 2.0
+  platforms:
+   - name: EL
+     versions:
+      - 5
+      - 6
+   - name: Fedora
+     versions:
+      - 16
+      - 17
+      - 18
+   - name: Ubuntu
+     versions:
+      - precise
+      - quantal
+      - raring
+      - saucy
+  galaxy_tags:
+   - web
+   - server
+   - nginx
+   - django
+   - http
+   - python
+dependencies:
+    - { role: ansible-role-base }
+    - { role: repleo.nginx,
+              create_nginx_conf: false,
+              nginx_sites: []
+      }
+    - { role: repleo.postgresql,
+            databases: [
+              { name: "{{ dbname }}",
+                users: [
+                  { user: "{{ dbuser }}",
+                    password: "{{ dbpassword }}",
+                    privileges: ALL,
+                    type: database }
+                ]
+              }
+            ]
+      }

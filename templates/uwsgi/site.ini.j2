@@ -1,0 +1,14 @@
+[uwsgi]
+thread=3
+master=1
+processes=10
+vacuum=true
+uid = www-data
+gid = www-data
+chmod-socket = 700
+chown-socket = www-data
+socket = /run/uwsgi/app/{{ www_domain }}/socket
+logto = /var/log/uwsgi/{{ www_domain }}.log
+chdir = /srv/www/{{ www_domain }}
+home  = /srv/www/{{ www_domain }}/env
+module = {{ appname }}.wsgi
