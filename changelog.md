@@ -1,6 +1,10 @@
 # Change Log
 Generic repleo django installation role
 
+## [0.1.3] - Release 2016-08-23
+
+* Set file mode of copied key to read-only for www-data
+
 ## [0.1.2] - Release 2016-08-22
 
 * Updated readme
