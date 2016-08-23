@@ -18,8 +18,9 @@ www_domain: "example.com",
 dbuser: "example",
 dbpassword: "3x4mple",
 dbname: "example",
-ssl_cert: "example.com_chain.pem",
-ssl_key: "example.com.key"
+files_dir: "{{ playbook_dir }}/files/",
+certificate: "example.com_chain.pem",
+key: "example.com.key"
 ```
 
 
@@ -37,8 +38,9 @@ ssl_key: "example.com.key"
                 dbuser: "example",
                 dbpassword: "3x4mple",
                 dbname: "example",
-                ssl_cert: "example.com_chain.pem",
-                ssl_key: "example.com.key"
+                files_dir: "{{ playbook_dir }}/files/",
+                certificate: "example.com_chain.pem",
+                key: "example.com.key"
         }
 
 ## License
