@@ -1,7 +1,7 @@
 # Ansible Role: git server via https by nginx
 
 [![Build Status](https://travis-ci.org/repleo/ansible-role-django-app.svg?branch=master)](https://travis-ci.org/repleo/ansible-role-django-app)
-[![Ansible Galaxy](http://img.shields.io/badge/galaxy-repleo.django-app-660198.svg?style=flat)](https://galaxy.ansible.com/repleo/django-app)
+[![Ansible Galaxy](http://img.shields.io/badge/galaxy-repleo.django--app-660198.svg?style=flat)](https://galaxy.ansible.com/repleo/django-app)
 
 Ansible role for installing a Django application with a Postgres database and NGINX / uWSGI application server stack.
 
