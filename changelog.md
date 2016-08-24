@@ -1,7 +1,7 @@
 # Change Log
 Generic repleo django installation role
 
-## [0.1.4] - Release 2016-08-23
+## [0.1.6, 0.1.5, 0.1.4] - Release 2016-08-23
 
 * Handling of key files
 
