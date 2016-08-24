@@ -12,8 +12,8 @@ server {
   server_name {{ www_domain }} *.{{ www_domain }};
 
   ssl on;
-  ssl_certificate /etc/nginx/ssl/{{ ssl_cert }};
-  ssl_certificate_key /etc/nginx/ssl/{{ ssl_key }};
+  ssl_certificate /etc/nginx/ssl/{{ certificate }};
+  ssl_certificate_key /etc/nginx/ssl/{{ key }};
 
   access_log  /var/log/nginx/{{ www_domain }}_access.log;
   error_log   /var/log/nginx/{{ www_domain }}_error.log;
