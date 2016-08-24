@@ -30,12 +30,12 @@
   file: path=/etc/nginx/ssl state=directory
 
 - name: Copy SSL keys
-  copy: src="{{files_dir}}{{key}}" dest=/etc/nginx/ssl/{{key}} backup=no mode=0400 owner=www-data group=www-data
+  copy: src="{{files_dir}}/{{key}}" dest=/etc/nginx/ssl/{{key}} backup=no mode=0400 owner=www-data group=www-data
   notify:
     - restart nginx
 
 - name: Copy SSL certificates
-  copy: src="{{files_dir}}{{certificate}}" dest=/etc/nginx/ssl/{{certificate}} backup=no mode=0644 owner=www-data group=www-data
+  copy: src="{{files_dir}}/{{certificate}}" dest=/etc/nginx/ssl/{{certificate}} backup=no mode=0644 owner=www-data group=www-data
   notify:
     - restart nginx
 
