@@ -1,4 +1,5 @@
 server {
+  listen 80;
   listen [::]:80;
   server_name {{ www_domain }} *.{{ www_domain }};
   return 301 https://$http_host$request_uri;
@@ -8,6 +9,7 @@ server {
 
 
 server {
+  listen 443 ssl;
   listen [::]:443 ssl;
   server_name {{ www_domain }} *.{{ www_domain }};
 
