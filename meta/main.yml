@@ -2,7 +2,7 @@ galaxy_info:
   author: Jeroen Arnoldus
   description: Ansible role for installing a Django based web application including uwsgi, postgresql and nginx
   company: Repleo, Amstelveen, Holland
-  license: BSD
+  license: GPLv3
   min_ansible_version: 2.0
   platforms:
    - name: EL
